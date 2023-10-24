@@ -2,11 +2,11 @@ from typing import Any
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
 from django.views.generic import (
-  CreateView,
-  DetailView,
-  DeleteView,
-  UpdateView,
-  ListView,
+    CreateView,
+    DetailView,
+    DeleteView,
+    UpdateView,
+    ListView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
@@ -123,7 +123,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
             'blog:profile',
             kwargs={
                 'username': post.author.username
-                }
+            }
         )
 
     def dispatch(self, request, *args, **kwargs: Any):
@@ -200,10 +200,10 @@ class ProfileDetailView(DetailView):
                     author=profile).order_by('-pub_date')
             else:
                 post_list = Post.objects.filter(Q(
-                        author=profile,
-                        is_published=True,
-                        category__is_published=True,
-                        pub_date__lt=now)).order_by('-pub_date')
+                    author=profile,
+                    is_published=True,
+                    category__is_published=True,
+                    pub_date__lt=now)).order_by('-pub_date')
         else:
             post_list = Post.objects.filter(Q(
                 author=profile,
