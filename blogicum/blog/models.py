@@ -6,7 +6,18 @@ from .constants import MAX_LENGTH, SLICE_TEXT
 User = get_user_model()
 
 
-class IsPublishedModel(models.Model):
+class CreatedAtModel(models.Model):
+    created_at = models.DateTimeField(
+        'Добавлено',
+        auto_now_add=True
+    )
+
+    class Meta:
+        abstract = True
+        ordering = ('created_at',)
+
+
+class IsPublishedModel(CreatedAtModel):
     is_published = models.BooleanField(
         default=True,
         verbose_name='Опубликовано',
@@ -17,17 +28,7 @@ class IsPublishedModel(models.Model):
         abstract = True
 
 
-class CreatedAtModel(models.Model):
-    created_at = models.DateTimeField(
-        'Добавлено',
-        auto_now_add=True
-    )
-
-    class Meta:
-        abstract = True
-
-
-class Location(IsPublishedModel, CreatedAtModel):
+class Location(IsPublishedModel):
     name = models.CharField('Название места', max_length=MAX_LENGTH)
 
     class Meta:
@@ -38,7 +39,7 @@ class Location(IsPublishedModel, CreatedAtModel):
         return self.name[:SLICE_TEXT]
 
 
-class Category(IsPublishedModel, CreatedAtModel):
+class Category(IsPublishedModel):
     title = models.CharField('Заголовок', max_length=MAX_LENGTH)
     description = models.TextField('Описание')
     slug = models.SlugField(
@@ -57,7 +58,7 @@ class Category(IsPublishedModel, CreatedAtModel):
         return self.title[:SLICE_TEXT]
 
 
-class Post(IsPublishedModel, CreatedAtModel):
+class Post(IsPublishedModel):
     title = models.CharField('Заголовок', max_length=MAX_LENGTH)
     text = models.TextField('Текст')
     pub_date = models.DateTimeField(
@@ -97,15 +98,23 @@ class Post(IsPublishedModel, CreatedAtModel):
         return self.title[:SLICE_TEXT]
 
 
-class Comment(models.Model):
+class Comment(CreatedAtModel):
     text = models.TextField('Оставьте ваш комментарий')
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
         related_name='comments',
+        verbose_name='Публикация',
     )
-    created_at = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Автор комментария',
+    )
 
     class Meta:
-        ordering = ('created_at',)
+        verbose_name = 'комментарий'
+        verbose_name_plural = 'Комментарии'
+
+    def __str__(self):
+        return self.text[:SLICE_TEXT]

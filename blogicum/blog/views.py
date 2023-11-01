@@ -17,9 +17,8 @@ from .mixin import (
     CommentMixin,
     PostMixin,
     CheckAuthorMixin,
-    comment_count,
-    filter_post,
 )
+from .function import comment_count, filter_post
 
 
 class UserCreateView(CreateView):
@@ -50,22 +49,22 @@ class PostDetailView(ListView):
     paginate_by = COMMENTS_LIMIT
 
     def get_object(self):
-        post_id = self.kwargs.get('post_id')
-        post = get_object_or_404(Post, pk=post_id)
+        post = get_object_or_404(
+            Post,
+            pk=self.kwargs.get('post_id')
+        )
         if post.author == self.request.user:
             return post
-        else:
-            return get_object_or_404(
-                Post,
-                pk=post_id,
-                is_published=True,
-                category__is_published=True,
-                pub_date__lt=now()
-            )
+        return get_object_or_404(
+            Post,
+            pk=self.kwargs.get('post_id'),
+            is_published=True,
+            category__is_published=True,
+            pub_date__lt=now()
+        )
 
     def get_queryset(self):
-        queryset = self.get_object().comments.all()
-        return queryset
+        return self.get_object().comments.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -101,8 +100,7 @@ class PostListView(ListView):
     paginate_by = POSTS_LIMIT
 
     def get_queryset(self):
-        queryset = comment_count(filter_post(Post.objects.all()))
-        return queryset
+        return comment_count(filter_post(Post.objects.all()))
 
 
 class ProfileDetailView(ListView):
@@ -115,7 +113,7 @@ class ProfileDetailView(ListView):
 
     def get_queryset(self):
         queryset = comment_count(
-            self.get_profile().posts.all().order_by('-pub_date')
+            self.get_profile().posts.all()
         )
         if self.request.user != self.get_profile():
             queryset = filter_post(queryset)
@@ -147,7 +145,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 class CategoryDetailView(ListView):
     model = Category
     template_name = 'blog/category.html'
-    paginate_by = 10
+    paginate_by = POSTS_LIMIT
 
     def get_category(self):
         return get_object_or_404(
@@ -159,7 +157,7 @@ class CategoryDetailView(ListView):
     def get_queryset(self):
         return comment_count(
             filter_post(
-                self.get_category().posts.all().order_by('-pub_date')
+                self.get_category().posts.all()
             )
         )
 
