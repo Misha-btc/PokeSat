@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import (
     UserPassesTestMixin,
     LoginRequiredMixin,
 )
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
 from .models import Comment, Post
@@ -32,16 +32,17 @@ class PostMixin(LoginRequiredMixin, CheckAuthorMixin):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        instance = get_object_or_404(Post, pk=self.kwargs[self.pk_url_kwarg])
-        form = PostForm(self.request.POST or None, instance=instance)
-        context['form'] = form
+        context['form'] = PostForm(
+            self.request.POST or None,
+            instance=self.object
+        )
         return context
 
 
 class CommentMixin(LoginRequiredMixin):
     model = Comment
     form_class = CommentForm
-    template_name = 'includes/comments.html'
+    template_name = 'blog/comment.html'
     pk_url_kwarg = 'post_id'
 
     def get_success_url(self):

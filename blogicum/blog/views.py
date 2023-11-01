@@ -87,11 +87,11 @@ class PostDeleteView(PostMixin, DeleteView):
 
 
 class CommentUpdateView(CheckAuthorMixin, CommentMixin, UpdateView):
-    template_name = 'blog/comment.html'
+    pass
 
 
 class CommentDeleteView(CommentMixin, CheckAuthorMixin, DeleteView):
-    template_name = 'blog/comment.html'
+    pass
 
 
 class PostListView(ListView):

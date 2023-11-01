@@ -24,14 +24,14 @@ class IsPublishedModel(CreatedAtModel):
         help_text='Снимите галочку, чтобы скрыть публикацию.'
     )
 
-    class Meta:
+    class Meta(CreatedAtModel.Meta):
         abstract = True
 
 
 class Location(IsPublishedModel):
     name = models.CharField('Название места', max_length=MAX_LENGTH)
 
-    class Meta:
+    class Meta(IsPublishedModel.Meta):
         verbose_name = 'местоположение'
         verbose_name_plural = 'Местоположения'
 
@@ -50,7 +50,7 @@ class Category(IsPublishedModel):
                   'дефис и подчёркивание.'
     )
 
-    class Meta:
+    class Meta(IsPublishedModel.Meta):
         verbose_name = 'категория'
         verbose_name_plural = 'Категории'
 
@@ -70,14 +70,12 @@ class Post(IsPublishedModel):
         User,
         on_delete=models.CASCADE,
         verbose_name='Автор публикации',
-        related_name='posts'
     )
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
         null=True,
         verbose_name='Категория',
-        related_name='posts'
     )
     location = models.ForeignKey(
         Location,
@@ -103,7 +101,6 @@ class Comment(CreatedAtModel):
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
-        related_name='comments',
         verbose_name='Публикация',
     )
     author = models.ForeignKey(
@@ -112,9 +109,10 @@ class Comment(CreatedAtModel):
         verbose_name='Автор комментария',
     )
 
-    class Meta:
+    class Meta(CreatedAtModel.Meta):
         verbose_name = 'комментарий'
         verbose_name_plural = 'Комментарии'
+        default_related_name = 'comments'
 
     def __str__(self):
         return self.text[:SLICE_TEXT]
