@@ -282,7 +282,7 @@ class Command(BaseCommand):
         general_dict[black_rare] = black_rare_dict
 
         for satrib, trans in general_dict.items():
-            for _, trans_data in trans.items():
+            for key, trans_data in trans.items():
                 sat_instance = Sat.objects.get(satribute=satrib)
                 for x, satribute_list in enumerate(trans_data['Few_satributes']):
                     for rare_sat in satribute_list:
@@ -290,7 +290,7 @@ class Command(BaseCommand):
                             first_satribute = int(trans_data['Satribute'][x])
                 parsed_date = parser.parse(trans_data['Date'])
                 transaction, created = Transaction.objects.get_or_create(
-                    date=parsed_date,
+                    tokenid=key,
                     defaults={
                         'new_owner': trans_data['New Owner'],
                         'listed_price': trans_data['Listed Price'],

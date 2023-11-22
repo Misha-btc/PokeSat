@@ -33,6 +33,7 @@ class Transaction(models.Model):
     listed_price = models.FloatField(default=0)
     satribute_amount = models.FloatField(default=0)
     date = models.DateTimeField()
+    tokenid = models.CharField(max_length=200)
     sat = models.ForeignKey(
         Sat,
         on_delete=models.SET_NULL,
