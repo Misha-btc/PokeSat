@@ -1,0 +1,23 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>
+      {% block title %}{% endblock %}
+    </title>
+    {% bootstrap_css %}
+  </head>
+  <body>
+    <header class="py-4">
+      <div class="container text-left">
+        <h1 style="font-weight: 900; color: white;">PōkeSat</h1>
+      </div>
+    </header>
+    <main>
+      <div class="container py-0">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+  </body>
+</html>

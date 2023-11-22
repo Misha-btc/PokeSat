@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+  Sat Market Cap
+{% endblock %}
+{% block content %}
+  <style>
+    table {
+      width: 100%;
+    }
+    .table-hover tbody tr:hover {
+      background-color: #212429;
+    }
+    body {
+      background-color: #1a1a1a;
+    }
+    th a {
+      text-decoration: none;
+      color: inherit;
+    }
+    table * {
+      color: white !important;
+    }
+    #sat-border{
+      height: 70px;
+      border-bottom: 0.5px solid #3e3e3e;
+      font-weight: 500;
+      vertical-align: middle;
+    }
+    table thead{
+      height: 42px;
+      border-bottom: 0.5px solid #3e3e3e;
+      border-top: 0.5px solid #3e3e3e;
+      font-size: 13px;
+    }
+    img {
+      border-radius: 10%;
+      margin-right: 10px;
+      width: 25px;
+      height: 25px;
+    }
+  </style>
+  <table id="sat-table" class="table table-responsive-sm table-hover">
+    <thead>
+      <tr id="trh" style="vertical-align: middle;"> 
+        <th style="text-align: left; max-width: 20px;"><a href="?order_by={% if request.GET.order_by == 'rank' %}-rank{% else %}rank{% endif %}">#{% if request.GET.order_by == '-rank' %}&#9660;{% elif request.GET.order_by == 'rank' %}&#9650;{% endif %}</a></th>
+        <th style="text-align: left;"><a href="?order_by={% if request.GET.order_by == 'satribute' %}-satribute{% else %}satribute{% endif %}">Satribute{% if request.GET.order_by == '-satribute' %}&#9660;{% elif request.GET.order_by == 'satribute' %}&#9650;{% endif %}</a></th>
+        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'price' %}-price{% else %}price{% endif %}">{% if request.GET.order_by == '-price' %}&#9660;{% elif request.GET.order_by == 'price' %}&#9650;{% endif %}Price</a></th>
+        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'market_cap' %}-market_cap{% else%}market_cap{% endif %}">{% if request.GET.order_by == '-market_cap' %}&#9660;{% elif request.GET.order_by == 'market_cap' %}&#9650;{% endif %}Market Cap</a></th>
+        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'total_supply' %}-total_supply{% else %}total_supply{% endif %}">{% if request.GET.order_by == '-total_supply' %}&#9660;{% elif request.GET.order_by == 'total_supply' %}&#9650;{% endif %}Total Supply</a></th>
+        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'circ_supply' %}-circ_supply{% else %}circ_supply{% endif %}">{% if request.GET.order_by == '-circ_supply' %}&#9660;{% elif request.GET.order_by == 'circ_supply' %}&#9650;{% endif %}Circulation Supply</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sat in object_list %}
+        <tr id="sat-border">
+          <td style="text-align: left;" class="text-muted">{{ sat.rank|intcomma }}</td>
+          <td style="text-align: left;">
+            <div style="display: flex; align-items: center;">
+              {% if sat.satribute == 'Uncommon' %}
+                <img src="{% static 'img/uncommon.png' %}" alt="Uncommon Logo">
+              {% elif sat.satribute == 'Pizza'%}
+                <img src="{% static 'img/pizza.png' %}" alt="pizza Logo">
+              {% elif sat.satribute == 'Vintage'%}
+                <img src="{% static 'img/vintage.png' %}" alt="Vintage Logo">
+              {% elif sat.satribute == 'Nakamoto'%}
+                <img src="{% static 'img/nakamoto.png' %}" alt="Nakamoto Logo">
+              {% elif sat.satribute == 'Palindrome'%}
+                <img src="{% static 'img/palindrome.png' %}" alt="Palindrome Logo">
+              {% elif sat.satribute == 'Block 78' %}
+                <img src="{% static 'img/78.png' %}" alt="78 Logo">
+              {% elif sat.satribute == 'Block 9' %}
+                <img src="{% static 'img/9.png' %}" alt="9 Logo">
+              {% elif sat.satribute == 'First Transaction' %}
+                <img src="{% static 'img/first.png' %}" alt="first Logo">
+              {% elif sat.satribute == 'Black Rare' %}
+                <img src="{% static 'img/black_rare.png' %}" alt="black rare Logo">
+              {% elif sat.satribute == 'Rare' %}
+                <img src="{% static 'img/rare.png' %}" alt="rare Logo">
+              {% else %}
+                <img src="{% static 'img/black.png' %}" alt="Black Logo">
+              {% endif %}
+              <span>{{ sat.satribute }}</span>
+            </div>
+          </td>
+          <td style="text-align: right;">${{ sat.price|intcomma }}</td>
+          <td style="text-align: right;">${{ sat.market_cap|intcomma }}</td>
+          <td style="text-align: right;">{{ sat.total_supply|intcomma }}</td>
+          <td style="text-align: right;">{{ sat.circ_supply|intcomma }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+      
