@@ -240,14 +240,12 @@ class Command(BaseCommand):
         general_dict[black] = black_dict
 
         ###################################.BLACK RARE.##########################
-
         filtered_black_rare = [
             activity for activity in data['activities']
             if any(black_rare in sub for sub in activity.get('satributes', []))
         ]
         for activity in filtered_black_rare:
             sublists = activity.get('satributes', [])
-            print(sublists)
             num_sublists = len(sublists)
             contains_black_rare = any(black_rare in sub_list for sub_list in sublists)
             if num_sublists <= 2 and contains_black_rare:
