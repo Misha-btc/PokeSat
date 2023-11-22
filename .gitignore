@@ -150,8 +150,5 @@ media/
 
 sent_emails/
 
-static_dev/
-
 # database
-db.sqlite3
 db.json

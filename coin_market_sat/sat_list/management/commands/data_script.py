@@ -22,13 +22,15 @@ class Command(BaseCommand):
             if contains_nakamoto and not contains_not_nakamoto:
                 new_owner = activity.get('newOwner')
                 price = activity.get('listedPrice')
+                satributes = activity.get('satributes')
                 satribute_amount = activity.get('satributesAmount')
                 date = activity.get('createdAt')
-                nakamoto_dict[activity.get('txId')]= {
+                nakamoto_dict[activity.get('tokenId')]= {
                     'New Owner': new_owner,
                     'Listed Price': price,
                     'Satribute': satribute_amount,
-                    'Date': date
+                    'Date': date,
+                    'Few_satributes': satributes
                 }
 
         general_dict[nakamoto] = nakamoto_dict
@@ -54,13 +56,15 @@ class Command(BaseCommand):
             if num_sublists <= 2 and contains_palindrom and not contains_not_palindrome:
                 new_owner = activity.get('newOwner')
                 price = activity.get('listedPrice')
+                satributes = activity.get('satributes')
                 satribute_amount = activity.get('satributesAmount')
                 date = activity.get('createdAt')
-                palindrome_dict[activity.get('txId')]= {
+                palindrome_dict[activity.get('tokenId')]= {
                     'New Owner': new_owner,
                     'Listed Price': price,
                     'Satribute': satribute_amount,
-                    'Date': date
+                    'Date': date,
+                    'Few_satributes': satributes
                 }
 
         general_dict[palindrome] = palindrome_dict
@@ -79,13 +83,15 @@ class Command(BaseCommand):
             if num_sublists <= 2 and contains_block9 and not contains_not_block9:
                 new_owner = activity.get('newOwner')
                 price = activity.get('listedPrice')
+                satributes = activity.get('satributes')
                 satribute_amount = activity.get('satributesAmount')
                 date = activity.get('createdAt')
-                block9_dict[activity.get('txId')]= {
+                block9_dict[activity.get('tokenId')]= {
                     'New Owner': new_owner,
                     'Listed Price': price,
                     'Satribute': satribute_amount,
-                    'Date': date
+                    'Date': date,
+                    'Few_satributes': satributes
                 }
 
         general_dict[block9] = block9_dict
@@ -104,13 +110,15 @@ class Command(BaseCommand):
             if num_sublists <= 2 and contains_vintage and not contains_not_vintage:
                 new_owner = activity.get('newOwner')
                 price = activity.get('listedPrice')
+                satributes = activity.get('satributes')
                 satribute_amount = activity.get('satributesAmount')
                 date = activity.get('createdAt')
-                vintage_dict[activity.get('txId')]= {
+                vintage_dict[activity.get('tokenId')]= {
                     'New Owner': new_owner,
                     'Listed Price': price,
                     'Satribute': satribute_amount,
-                    'Date': date
+                    'Date': date,
+                    'Few_satributes': satributes
                 }
 
         general_dict[vintage] = vintage_dict
@@ -129,13 +137,15 @@ class Command(BaseCommand):
             if num_sublists <= 2 and contains_pizza and not contains_not_pizza:
                 new_owner = activity.get('newOwner')
                 price = activity.get('listedPrice')
+                satributes = activity.get('satributes')
                 satribute_amount = activity.get('satributesAmount')
                 date = activity.get('createdAt')
-                pizza_dict[activity.get('txId')]= {
+                pizza_dict[activity.get('tokenId')]= {
                     'New Owner': new_owner,
                     'Listed Price': price,
                     'Satribute': satribute_amount,
-                    'Date': date
+                    'Date': date,
+                    'Few_satributes': satributes
                 }
 
         general_dict[pizza] = pizza_dict
@@ -154,13 +164,15 @@ class Command(BaseCommand):
             if num_sublists <= 2 and contains_uncommon and not contains_not_uncommon:
                 new_owner = activity.get('newOwner')
                 price = activity.get('listedPrice')
+                satributes = activity.get('satributes')
                 satribute_amount = activity.get('satributesAmount')
                 date = activity.get('createdAt')
-                uncommon_dict[activity.get('txId')]= {
+                uncommon_dict[activity.get('tokenId')]= {
                     'New Owner': new_owner,
                     'Listed Price': price,
                     'Satribute': satribute_amount,
-                    'Date': date
+                    'Date': date,
+                    'Few_satributes': satributes
                 }
 
         general_dict[uncommon] = uncommon_dict
@@ -179,13 +191,15 @@ class Command(BaseCommand):
             if num_sublists <= 2 and contains_block78 and not contains_not_block78:
                 new_owner = activity.get('newOwner')
                 price = activity.get('listedPrice')
+                satributes = activity.get('satributes')
                 satribute_amount = activity.get('satributesAmount')
                 date = activity.get('createdAt')
-                block78_dict[activity.get('txId')]= {
+                block78_dict[activity.get('tokenId')]= {
                     'New Owner': new_owner,
                     'Listed Price': price,
                     'Satribute': satribute_amount,
-                    'Date': date
+                    'Date': date,
+                    'Few_satributes': satributes
                 }
 
         general_dict[block78] = block78_dict
@@ -203,13 +217,15 @@ class Command(BaseCommand):
             if num_sublists <= 2 and contains_rare:
                 new_owner = activity.get('newOwner')
                 price = activity.get('listedPrice')
+                satributes = activity.get('satributes')
                 satribute_amount = activity.get('satributesAmount')
                 date = activity.get('createdAt')
-                rare_dict[activity.get('txId')]= {
+                rare_dict[activity.get('tokenId')]= {
                     'New Owner': new_owner,
                     'Listed Price': price,
                     'Satribute': satribute_amount,
-                    'Date': date
+                    'Date': date,
+                    'Few_satributes': satributes
                 }
 
         general_dict[rare] = rare_dict
@@ -228,13 +244,15 @@ class Command(BaseCommand):
             if num_sublists <= 2 and contains_black and not contains_not_black:
                 new_owner = activity.get('newOwner')
                 price = activity.get('listedPrice')
+                satributes = activity.get('satributes')
                 satribute_amount = activity.get('satributesAmount')
                 date = activity.get('createdAt')
-                black_dict[activity.get('txId')]= {
+                black_dict[activity.get('tokenId')]= {
                     'New Owner': new_owner,
                     'Listed Price': price,
                     'Satribute': satribute_amount,
-                    'Date': date
+                    'Date': date,
+                    'Few_satributes': satributes
                 }
 
         general_dict[black] = black_dict
@@ -251,20 +269,25 @@ class Command(BaseCommand):
             if num_sublists <= 2 and contains_black_rare:
                 new_owner = activity.get('newOwner')
                 price = activity.get('listedPrice')
+                satributes = activity.get('satributes')
                 satribute_amount = activity.get('satributesAmount')
                 date = activity.get('createdAt')
-                black_rare_dict[activity.get('txId')]= {
+                black_rare_dict[activity.get('tokenId')]= {
                     'New Owner': new_owner,
                     'Listed Price': price,
                     'Satribute': satribute_amount,
-                    'Date': date
+                    'Date': date,
+                    'Few_satributes': satributes
                 }
         general_dict[black_rare] = black_rare_dict
 
         for satrib, trans in general_dict.items():
             for _, trans_data in trans.items():
                 sat_instance = Sat.objects.get(satribute=satrib)
-                first_satribute = int(trans_data['Satribute'][0])
+                for x, satribute_list in enumerate(trans_data['Few_satributes']):
+                    for rare_sat in satribute_list:
+                        if rare_sat == satrib:
+                            first_satribute = int(trans_data['Satribute'][x])
                 parsed_date = parser.parse(trans_data['Date'])
                 transaction, created = Transaction.objects.get_or_create(
                     date=parsed_date,
