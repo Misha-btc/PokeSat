@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load custom_filters %}
 {% load django_bootstrap5 %}
 {% load static %}
 {% load humanize %}
@@ -45,12 +46,12 @@
   <table id="sat-table" class="table table-responsive-sm table-hover">
     <thead>
       <tr id="trh" style="vertical-align: middle;"> 
-        <th style="text-align: left; max-width: 20px;"><a href="?order_by={% if request.GET.order_by == 'rank' %}-rank{% else %}rank{% endif %}">#{% if request.GET.order_by == '-rank' %}&#9660;{% elif request.GET.order_by == 'rank' %}&#9650;{% endif %}</a></th>
-        <th style="text-align: left;"><a href="?order_by={% if request.GET.order_by == 'satribute' %}-satribute{% else %}satribute{% endif %}">Satribute{% if request.GET.order_by == '-satribute' %}&#9660;{% elif request.GET.order_by == 'satribute' %}&#9650;{% endif %}</a></th>
-        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'price' %}-price{% else %}price{% endif %}">{% if request.GET.order_by == '-price' %}&#9660;{% elif request.GET.order_by == 'price' %}&#9650;{% endif %}Price</a></th>
-        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'market_cap' %}-market_cap{% else%}market_cap{% endif %}">{% if request.GET.order_by == '-market_cap' %}&#9660;{% elif request.GET.order_by == 'market_cap' %}&#9650;{% endif %}Market Cap</a></th>
-        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'total_supply' %}-total_supply{% else %}total_supply{% endif %}">{% if request.GET.order_by == '-total_supply' %}&#9660;{% elif request.GET.order_by == 'total_supply' %}&#9650;{% endif %}Total Supply</a></th>
-        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'circ_supply' %}-circ_supply{% else %}circ_supply{% endif %}">{% if request.GET.order_by == '-circ_supply' %}&#9660;{% elif request.GET.order_by == 'circ_supply' %}&#9650;{% endif %}Circulation Supply</a></th>
+        <th style="text-align: left; max-width: 20px;"><a href="?order_by={% if request.GET.order_by == 'rank' %}-rank{% else %}rank{% endif %}">#{% if request.GET.order_by == '-rank' %}&#9650;{% elif request.GET.order_by == 'rank' %}&#9660;{% endif %}</a></th>
+        <th style="text-align: left;"><a href="?order_by={% if request.GET.order_by == 'satribute' %}-satribute{% else %}satribute{% endif %}">Satribute{% if request.GET.order_by == '-satribute' %}&#9650;{% elif request.GET.order_by == 'satribute' %}&#9660;{% endif %}</a></th>
+        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'price' %}-price{% else %}price{% endif %}">{% if request.GET.order_by == '-price' %}&#9650;;{% elif request.GET.order_by == 'price' %}&#9660;{% endif %}Price</a></th>
+        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'market_cap' %}-market_cap{% else%}market_cap{% endif %}">{% if request.GET.order_by == '-market_cap' %}&#9650;{% elif request.GET.order_by == 'market_cap' %}&#9660;{% endif %}Market Cap</a></th>
+        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'total_supply' %}-total_supply{% else %}total_supply{% endif %}">{% if request.GET.order_by == '-total_supply' %}&#9650;{% elif request.GET.order_by == 'total_supply' %}&#9660;{% endif %}Total Supply</a></th>
+        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'circ_supply' %}-circ_supply{% else %}circ_supply{% endif %}">{% if request.GET.order_by == '-circ_supply' %}&#9650;{% elif request.GET.order_by == 'circ_supply' %}&#9660;{% endif %}Circulation Supply</a></th>
       </tr>
     </thead>
     <tbody>
@@ -85,7 +86,7 @@
               <span>{{ sat.satribute }}</span>
             </div>
           </td>
-          <td style="text-align: right;">${{ sat.price|intcomma }}</td>
+          <td style="text-align: right;">${{ sat.price|format_price|intcomma }}</td>
           <td style="text-align: right;">${{ sat.market_cap|intcomma }}</td>
           <td style="text-align: right;">{{ sat.total_supply|intcomma }}</td>
           <td style="text-align: right;">{{ sat.circ_supply|intcomma }}</td>
