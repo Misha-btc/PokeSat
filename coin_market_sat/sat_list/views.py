@@ -4,6 +4,8 @@ from django.views.generic import (
 
 from .models import Sat, Transaction
 
+
+
 def update_sat_based_on_transaction(request, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
     sat = transaction.sat

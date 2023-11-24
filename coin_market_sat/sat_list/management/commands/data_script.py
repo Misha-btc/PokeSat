@@ -9,6 +9,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         response = requests.get('https://api-mainnet.magiceden.dev/v2/ord/btc/activities?collectionSymbol=rare-sats&kind=buying_broadcasted', headers=headers)  # URL вашего API
         data = response.json()
+
         filtered_first = [
             activity for activity in data['activities']
             if any(nakamoto in sub for sub in activity.get('satributes', []))

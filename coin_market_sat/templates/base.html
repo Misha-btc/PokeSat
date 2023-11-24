@@ -1,8 +1,32 @@
 {% load django_bootstrap5 %}
+{% load custom_filters %}
 {% load static %}
 <!DOCTYPE html>
+<style>
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  margin-right: 10px;
+}
+</style>
 <html lang="ru">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'img/fav/favicon.ico' %}" type="image">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/fav/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/fav/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/fav/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'img/fav/site.webmanifest' %}">
     <title>
       {% block title %}{% endblock %}
     </title>
@@ -10,8 +34,14 @@
   </head>
   <body>
     <header class="py-4">
-      <div class="container text-left">
-        <h1 style="font-weight: 900; color: white;">PōkeSat</h1>
+      <div class="container header-content">
+        <div class="logo">
+          <img src="{% static 'img/fav/LOGO.png' %}" alt="icon" style="width: 60px; height: auto; margin-bottom: 10px;">
+          <h1 style="font-weight: 900; color: white;">PōkeSat</h1>
+        </div>
+        <div class="bitcoin-price" style="font-weight: 900; color: white; font-size: 30px; display: flex; align-items: center;">
+          {{ bitcoin_price|format_price }}<img src="{% static 'img/Bitcoin.svg.png' %}" alt="bitcoin Logo" style="width: 40px; height: auto;">
+        </div>
       </div>
     </header>
     <main>

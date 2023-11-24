@@ -4,6 +4,12 @@ from django.dispatch import receiver
 from django.utils import timezone
 from datetime import timedelta
 
+
+class Bitcoin(models.Model):
+    name = models.CharField('Satribute', max_length=50, default='Bitcoin')
+    price = models.FloatField('Bitcoin price:', default=37000)
+
+
 class Sat(models.Model):
     satribute = models.CharField('Satribute', max_length=50)
     price = models.FloatField('Floor Price', default=0)
@@ -56,12 +62,11 @@ def update_sat(sender, instance, **kwargs):
         satribute=instance.satribute, 
         date__gte=two_hours_ago_utc
     )
-
-        # Автоматически вызывается при создании или изменении объекта Transaction
-    transactions = Transaction.objects.filter(satribute=instance.satribute)
     total_price = sum(t.listed_price for t in recent_transactions)
     total_satribute = sum(t.satribute_amount for t in recent_transactions)
-    avg_price = total_price / total_satribute / 100000000 * 37094
+    bitcoin = Bitcoin.objects.first()
+    bitcoin_price = bitcoin.price if bitcoin else 0
+    avg_price = total_price / total_satribute / 100000000 * bitcoin_price
     sat = instance.sat
         # Вызов метода для обновления Sat на основе Transaction
     sat.update_from_transaction(avg_price)
