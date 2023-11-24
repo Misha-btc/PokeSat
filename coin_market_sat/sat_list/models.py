@@ -18,10 +18,12 @@ class Sat(models.Model):
     circ_supply = models.IntegerField('Circulating Supply', default=0)
     rank = models.IntegerField(null=True, blank=True)
 
-    def update_from_transaction(self, new_price):
+    def update_from_transaction(self, new_price, total_satribute):
         # Обновите атрибуты объекта Sat
         self.price = new_price
-        self.market_cap = self.price * self.total_supply
+        bitcoin = Bitcoin.objects.first()
+        bitcoin_price = bitcoin.price if bitcoin else 0
+        self.market_cap = self.price * self.circ_supply  -  total_satribute / 100000000 * bitcoin_price
         # Вы можете выполнить другие арифметические операции и обновить другие атрибуты Sat
         # Сохраните изменения в базе данных
         self.save()
@@ -66,7 +68,7 @@ def update_sat(sender, instance, **kwargs):
     total_satribute = sum(t.satribute_amount for t in recent_transactions)
     bitcoin = Bitcoin.objects.first()
     bitcoin_price = bitcoin.price if bitcoin else 0
-    avg_price = total_price / total_satribute  / 100000000 * bitcoin_price - total_satribute / 100000000 * bitcoin_price
+    avg_price = total_price / total_satribute  / 100000000 * bitcoin_price
     sat = instance.sat
         # Вызов метода для обновления Sat на основе Transaction
-    sat.update_from_transaction(avg_price)
+    sat.update_from_transaction(avg_price, total_satribute)
