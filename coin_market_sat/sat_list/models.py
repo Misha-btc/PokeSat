@@ -66,7 +66,7 @@ def update_sat(sender, instance, **kwargs):
     total_satribute = sum(t.satribute_amount for t in recent_transactions)
     bitcoin = Bitcoin.objects.first()
     bitcoin_price = bitcoin.price if bitcoin else 0
-    avg_price = total_price / total_satribute / 100000000 * bitcoin_price
+    avg_price = total_price / total_satribute  / 100000000 * bitcoin_price - total_satribute / 100000000 * bitcoin_price
     sat = instance.sat
         # Вызов метода для обновления Sat на основе Transaction
     sat.update_from_transaction(avg_price)
