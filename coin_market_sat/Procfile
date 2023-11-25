@@ -1,0 +1,2 @@
+web: gunicorn django_sprint4_copy.wsgi --log-file -
+
