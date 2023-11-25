@@ -124,11 +124,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static_dev',
-]
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATIC_URL = '/static/'
+
+# Укажите каталог разработки для статических файлов
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static_dev'),  # Изменил BASE_DIR / 'static_dev' на os.path.join(BASE_DIR, 'static_dev')
+]
+
+# Укажите каталог для сбора статических файлов
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Изменил '/static' на os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
