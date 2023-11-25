@@ -1,1 +1,1 @@
-web: gunicorn pokesat.wsgi
+web: gunicorn coin_market_sat.wsgi
