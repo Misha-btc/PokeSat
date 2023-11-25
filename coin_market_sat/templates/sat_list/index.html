@@ -39,8 +39,8 @@
     img {
       border-radius: 10%;
       margin-right: 10px;
-      width: 25px;
-      height: 25px;
+      width: 30px;
+      height: 30px;
     }
   </style>
   <table id="sat-table" class="table table-responsive-sm table-hover">
@@ -48,7 +48,7 @@
       <tr id="trh" style="vertical-align: middle;"> 
         <th style="text-align: left; max-width: 20px;"><a href="?order_by={% if request.GET.order_by == 'rank' %}-rank{% else %}rank{% endif %}">#{% if request.GET.order_by == '-rank' %}&#9650;{% elif request.GET.order_by == 'rank' %}&#9660;{% endif %}</a></th>
         <th style="text-align: left;"><a href="?order_by={% if request.GET.order_by == 'satribute' %}-satribute{% else %}satribute{% endif %}">Satribute{% if request.GET.order_by == '-satribute' %}&#9650;{% elif request.GET.order_by == 'satribute' %}&#9660;{% endif %}</a></th>
-        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'price' %}-price{% else %}price{% endif %}">{% if request.GET.order_by == '-price' %}&#9650;;{% elif request.GET.order_by == 'price' %}&#9660;{% endif %}Price</a></th>
+        <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'price' %}-price{% else %}price{% endif %}">{% if request.GET.order_by == '-price' %}&#9650;{% elif request.GET.order_by == 'price' %}&#9660;{% endif %}Price</a></th>
         <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'market_cap' %}-market_cap{% else%}market_cap{% endif %}">{% if request.GET.order_by == '-market_cap' %}&#9650;{% elif request.GET.order_by == 'market_cap' %}&#9660;{% endif %}Market Cap</a></th>
         <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'total_supply' %}-total_supply{% else %}total_supply{% endif %}">{% if request.GET.order_by == '-total_supply' %}&#9650;{% elif request.GET.order_by == 'total_supply' %}&#9660;{% endif %}Total Supply</a></th>
         <th style="text-align: right;"><a href="?order_by={% if request.GET.order_by == 'circ_supply' %}-circ_supply{% else %}circ_supply{% endif %}">{% if request.GET.order_by == '-circ_supply' %}&#9650;{% elif request.GET.order_by == 'circ_supply' %}&#9660;{% endif %}Circulation Supply</a></th>
@@ -71,9 +71,9 @@
               {% elif sat.satribute == 'Palindrome'%}
                 <img src="{% static 'img/palindrome3.0.png' %}" alt="Palindrome Logo">
               {% elif sat.satribute == 'Block 78' %}
-                <img src="{% static 'img/78.png' %}" alt="78 Logo">
+                <img src="{% static 'img/783.0.png' %}" alt="78 Logo">
               {% elif sat.satribute == 'Block 9' %}
-                <img src="{% static 'img/9.png' %}" alt="9 Logo">
+                <img src="{% static 'img/92.0.png' %}" alt="9 Logo">
               {% elif sat.satribute == 'First Transaction' %}
                 <img src="{% static 'img/first.png' %}" alt="first Logo">
               {% elif sat.satribute == 'Black Rare' %}
