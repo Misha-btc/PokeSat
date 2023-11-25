@@ -2,7 +2,7 @@ blinker==1.4
 cryptography==3.4.8
 dbus-python==1.2.18
 distro==1.7.0
-distro-info===1.1build1
+distro-info==1.1build1
 httplib2==0.20.2
 importlib-metadata==4.6.4
 jeepney==0.7.1
