@@ -1,1 +1,2 @@
-web: gunicorn pokesat.wsgi
+web: gunicorn pokesat.wsgi --log-file
+
