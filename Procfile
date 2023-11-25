@@ -1,1 +1,1 @@
-web: gunicorn coin_market_sa.wsgi --log-file
+web: gunicorn PokeSat.coin_market_sat.wsgi --log-file=-
